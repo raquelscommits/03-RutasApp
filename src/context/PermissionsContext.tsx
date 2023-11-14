@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { createContext, useEffect, useState } from 'react';
 import { AppState, Platform } from 'react-native';
 import { check, PERMISSIONS, PermissionStatus, request, openSettings } from 'react-native-permissions';
@@ -10,7 +11,7 @@ export interface PermissionsState {
 // Estado inicial de los permisos
 export const permissionInitState: PermissionsState = {
     locationStatus: 'unavailable',
-}
+};
 
 // Definición de las propiedades que estarán disponibles en el contexto de permisos
 type PermissionsContextProps = {
@@ -20,7 +21,7 @@ type PermissionsContextProps = {
 }
 
 // Creación del contexto de permisos
-export const PermissionsContext = createContext({} as PermissionsContextProps ); 
+export const PermissionsContext = createContext({} as PermissionsContextProps );
 
 // Componente proveedor de contexto de permisos
 export const PermissionsProvider = ({ children }: any ) => {
@@ -37,7 +38,7 @@ export const PermissionsProvider = ({ children }: any ) => {
             }
             checkLocationPermission();
         });
-    }, [])
+    }, []);
 
     // Función para solicitar permisos de ubicación
     const askLocationPermission = async () => {
@@ -51,14 +52,14 @@ export const PermissionsProvider = ({ children }: any ) => {
         }
 
         // Abre la configuración si los permisos están bloqueados
-        if ( permissionStatus === 'blocked' ) {
+        if ( permissionStatus === 'denied' ) {
             openSettings();
         }
 
         // Actualiza el estado de los permisos
         setPermissions({
             ...permissions,
-            locationStatus: permissionStatus
+            locationStatus: permissionStatus,
         });
     };
 
@@ -76,7 +77,7 @@ export const PermissionsProvider = ({ children }: any ) => {
         // Actualiza el estado de los permisos
         setPermissions({
             ...permissions,
-            locationStatus: permissionStatus
+            locationStatus: permissionStatus,
         });
     };
 
